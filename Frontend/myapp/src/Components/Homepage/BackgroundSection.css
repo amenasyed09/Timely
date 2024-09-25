@@ -1,0 +1,20 @@
+
+.underline-expand {
+    position: relative;
+  }
+  
+  .underline-expand::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background-color: red;
+    transition: width 0.5s ease-in-out;
+  }
+  
+  .underline-expand.show-underline::after {
+    width: 100%;
+  }
+  
