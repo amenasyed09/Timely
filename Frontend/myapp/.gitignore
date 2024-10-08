@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-config.py 
+Backend/config.py
 # production
 /build
 
