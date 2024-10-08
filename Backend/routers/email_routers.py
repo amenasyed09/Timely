@@ -3,8 +3,8 @@ import smtplib
 from email.mime.text import MIMEText
 from fastapi import APIRouter, HTTPException
 from pymongo import MongoClient
+from config import MONGO_URL,SENDER_EMAIL,PASSWORD
 
-MONGO_URL = "mongodb://localhost:27017"
 client = MongoClient(MONGO_URL)
 db = client['Project']
 history_collection = db['history']
@@ -12,8 +12,6 @@ user_collection = db['users']
 
 router = APIRouter()
 
-sender_email = "timelynews01@gmail.com"
-password = "qmiu epnb ezhe vtcl"
 
 
 @router.get("/sendemail/{user}")
@@ -44,12 +42,12 @@ async def send_email(user: str):
         
         msg = MIMEText(body, 'html')
         msg['Subject'] = subject
-        msg['From'] = sender_email
+        msg['From'] = SENDER_EMAIL
         msg['To'] = receiver_email
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, msg.as_string())
+        server.login(SENDER_EMAIL, PASSWORD)
+        server.sendmail(SENDER_EMAIL, receiver_email, msg.as_string())
         server.quit()
 
         return {"message": "Email sent successfully with the first history fact."}

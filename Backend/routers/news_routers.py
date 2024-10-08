@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException, Query
 import httpx
 from pydantic import BaseModel
 from newspaper import Article
-
+from config import API_KEY
 router = APIRouter()
 class ArticleRequest(BaseModel):
     url: str
@@ -13,7 +13,7 @@ class ArticleRequest(BaseModel):
 async def get_news():
     try:
         async with httpx.AsyncClient() as client:
-            response = await client.get('https://gnews.io/api/v4/top-headlines?country=in&category=general&apikey=56ccb1e25242e4191fe03acb6e1b310a')
+            response = await client.get(f'https://gnews.io/api/v4/top-headlines?country=in&category=general&apikey={API_KEY}')
             response.raise_for_status() 
             articles = response.json().get('articles', [])
 
@@ -29,7 +29,7 @@ async def get_news():
 async def news(category:str):
     try:
         async with httpx.AsyncClient() as client:
-            response = await client.get('https://gnews.io/api/v4/top-headlines?category=' + category + '&lang=en&country=in&apikey=56ccb1e25242e4191fe03acb6e1b310a')
+            response = await client.get(f'https://gnews.io/api/v4/top-headlines?category={category}&lang=en&country=in&apikey={API_KEY}')
             response.raise_for_status() 
             articles = response.json().get('articles', [])
 

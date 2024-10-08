@@ -3,10 +3,10 @@ from fastapi import APIRouter, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
 import folium
 
-
+from config import MONGO_URL
 from pymongo import MongoClient
 
-client = MongoClient("mongodb://localhost:27017")
+client = MongoClient(MONGO_URL)
 db = client['Project']
 history_collection = db['history']
 router = APIRouter()
