@@ -2,6 +2,9 @@
 
 Welcome to the **Timely** project! This web application is built using **React** with **Tailwind CSS** for the frontend and **FastAPI** for the backend. It utilizes a **MongoDB** database to store and manage data.
 
+#Live Demo 
+https://timely-rmbx.onrender.com/ - (Only the Frontend part is Deployed as of now)
+
 ## Table of Contents
 
 - [Features](#features)
